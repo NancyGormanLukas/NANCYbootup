@@ -20,9 +20,9 @@ app.engine('handlebars', handlebars({
 app.set('view engine', 'handlebars');
 
 //home page
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
 
-	Posts.findAll({}).then(function(result){
+	Posts.findAll({}).then(function(result) {
 		console.log(result);
 		return res.render('index', {
 			posts: result
@@ -30,23 +30,42 @@ app.get('/', function(req, res){
 	});
 	
 
-})
+});
 //form page
-app.get('/new-post', function(req, res){
+app.get('/new-post', function(req, res) {
 	res.render('new');
 	
 });
-app.post('/new-post', function(req, res){
-	res.render('new');
+app.post('/new-post', function(req, res) {
 	var body = req.body;
-	console.log(body);
+	//create the post in the database
+	Posts.create({
+		title: body.title,
+		url: body.url,
+		image: body.image,
+		score: 0,
+		description: body.description
+
+
+	}).then(function(data){
+		console.log('data', data);
+	//redirect to the posts/:id page
+		res.redirect('/posts/' + data.dataValues.id);
+	});
 });
 
 
 
-app.get('/posts/:id', function(req, res){
-	res.render('post');
-	
+app.get('/posts/:id', function(req, res) {
+	var id = req.params.id;
+	Posts.findOne({
+		where:{
+			id: id
+		}
+	}).then(function(post){
+		console.log('post', post);
+		res.render('post');
+	});
 });
 
 
