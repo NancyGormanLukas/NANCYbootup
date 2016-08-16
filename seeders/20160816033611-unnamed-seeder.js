@@ -6,19 +6,19 @@ module.exports = {
       //Add altering commands here.
       //Return a promise to correctly handle asynchronicity.
       return queryInterface.bulkInsert('Categories', [{
-        title: 'Javascript',
+        title: 'Shout Outs!',
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        title: 'HTML',
+        title: 'Share Success',
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        title: 'CSS',
+        title: 'Code Snippets',
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        title: 'Database',
+        title: 'Helpful Resources',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {});

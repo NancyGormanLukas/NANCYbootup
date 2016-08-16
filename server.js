@@ -103,6 +103,7 @@ app.post('/new-post', function(req, res) {
 		description: body.description
 	}).then(function(data) {
 		console.log('data', data);
+		
 		//redirect to the posts/:id page
 		res.redirect('/posts/' + data.dataValues.id);
 	});
